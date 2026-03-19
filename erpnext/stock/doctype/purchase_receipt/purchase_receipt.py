@@ -1413,8 +1413,8 @@ def make_purchase_return(source_name, target_doc=None):
 
 
 @frappe.whitelist()
-def update_purchase_receipt_status(docname, status):
-	pr = frappe.get_doc("Purchase Receipt", docname)
+def update_purchase_receipt_status(docname: str, status: str):
+	pr = frappe.get_lazy_doc("Purchase Receipt", docname, check_permission="write")
 	pr.update_status(status)
 
 

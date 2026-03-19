@@ -911,8 +911,8 @@ def get_list_context(context=None):
 
 
 @frappe.whitelist()
-def update_status(status, name):
-	po = frappe.get_doc("Purchase Order", name)
+def update_status(status: str, name: str):
+	po = frappe.get_lazy_doc("Purchase Order", name, check_permission="write")
 	po.update_status(status)
 	po.update_delivered_qty_in_sales_order()
 
