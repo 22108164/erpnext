@@ -1,16 +1,25 @@
 {
   "name": "nxlims-desktop",
   "version": "1.0.0",
-  "description": "NxLIMS Windows desktop launcher",
+  "description": "NxLIMS Desktop Application - Laboratory Information Management System",
   "main": "main.js",
-  "author": "NxLIMS",
+  "author": "NxLIMS Team",
   "license": "GPL-3.0",
+  "homepage": "https://nxlims.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frappe/erpnext.git"
+  },
   "scripts": {
     "start": "electron .",
-    "dist:win": "electron-builder --win nsis"
+    "dev": "electron . --dev",
+    "dist:win": "electron-builder --win nsis --publish never",
+    "dist:win:portable": "electron-builder --win portable --publish never",
+    "dist": "electron-builder"
   },
   "dependencies": {
-    "electron-store": "^8.2.0"
+    "electron-store": "^8.2.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "electron": "^30.5.1",
@@ -19,6 +28,9 @@
   "build": {
     "appId": "com.nxlims.desktop",
     "productName": "NxLIMS",
+    "directories": {
+      "buildResources": "assets"
+    },
     "files": [
       "main.js",
       "preload.js",
@@ -33,16 +45,37 @@
           "arch": [
             "x64"
           ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
         }
       ],
-      "icon": "assets/icon.ico"
+      "icon": "assets/icon.ico",
+      "certificateFile": null,
+      "certificatePassword": null,
+      "signingHashAlgorithms": [
+        "sha256"
+      ]
     },
     "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "NxLIMS"
+      "shortcutName": "NxLIMS",
+      "installerIcon": "assets/icon.ico",
+      "uninstallerIcon": "assets/icon.ico",
+      "installerHeaderIcon": "assets/installer-header.ico",
+      "license": "../../license.txt",
+      "artifactName": "NxLIMS-${version}-setup.exe",
+      "systemWide": true
+    },
+    "portable": {
+      "artifactName": "NxLIMS-${version}-portable.exe"
     }
   }
 }
+

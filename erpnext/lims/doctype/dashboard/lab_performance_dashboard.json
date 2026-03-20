@@ -1,0 +1,49 @@
+{
+  "name": "Lab Performance Dashboard",
+  "doctype": "Dashboard",
+  "charts": [
+    {
+      "chart": "LIMS Test Statistics",
+      "chart_type": "Report",
+      "width": "Half"
+    }
+  ],
+  "cards": [
+    {
+      "card_name": "Total Patients Registered",
+      "card_type": "Number",
+      "number": "LIMS Patient",
+      "number_field": "name"
+    },
+    {
+      "card_name": "Total Tests Completed",
+      "card_type": "Number",
+      "number": "Lab Test Registration",
+      "number_field": "name",
+      "filters": {
+        "status": "Completed"
+      }
+    },
+    {
+      "card_name": "Pending Tests",
+      "card_type": "Number",
+      "number": "Lab Test Registration",
+      "number_field": "name",
+      "filters": {
+        "status": "Registered"
+      }
+    },
+    {
+      "card_name": "Today's Revenue",
+      "card_type": "Number",
+      "number": "Lab Test Registration",
+      "number_field": "total_amount",
+      "filters": {
+        "registration_date": [">=", "TODAY"]
+      }
+    }
+  ],
+  "is_hidden": 0,
+  "module": "LIMS",
+  "docstatus": 0
+}

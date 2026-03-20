@@ -1,0 +1,179 @@
+{
+  "actions": [],
+  "allow_import": 1,
+  "creation": "2026-03-20 00:00:00.000000",
+  "doctype": "DocType",
+  "document_type": "Transaction",
+  "engine": "InnoDB",
+  "field_order": [
+    "lab_result_entry",
+    "patient_id",
+    "patient_name",
+    "test_catalog",
+    "critical_value",
+    "result_value",
+    "referred_doctor_name",
+    "referred_doctor_email",
+    "referred_doctor_mobile",
+    "referred_doctor_whatsapp",
+    "alert_type",
+    "notification_status",
+    "email_status",
+    "sms_status",
+    "whatsapp_status",
+    "alert_sent_on",
+    "error_log"
+  ],
+  "fields": [
+    {
+      "fieldname": "lab_result_entry",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Lab Result Entry",
+      "options": "Lab Result Entry",
+      "reqd": 1
+    },
+    {
+      "fieldname": "patient_id",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Patient ID",
+      "read_only": 1
+    },
+    {
+      "fieldname": "patient_name",
+      "fieldtype": "Data",
+      "label": "Patient Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "test_catalog",
+      "fieldtype": "Data",
+      "label": "Test Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "critical_value",
+      "fieldtype": "Data",
+      "label": "Critical Value / Range",
+      "read_only": 1
+    },
+    {
+      "fieldname": "result_value",
+      "fieldtype": "Data",
+      "label": "Result Value",
+      "read_only": 1
+    },
+    {
+      "fieldname": "referred_doctor_name",
+      "fieldtype": "Data",
+      "label": "Referred Doctor Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "referred_doctor_email",
+      "fieldtype": "Data",
+      "label": "Referred Doctor Email",
+      "options": "Email",
+      "read_only": 1
+    },
+    {
+      "fieldname": "referred_doctor_mobile",
+      "fieldtype": "Data",
+      "label": "Referred Doctor Mobile",
+      "read_only": 1
+    },
+    {
+      "fieldname": "referred_doctor_whatsapp",
+      "fieldtype": "Data",
+      "label": "Referred Doctor WhatsApp",
+      "read_only": 1
+    },
+    {
+      "default": "Automatic",
+      "fieldname": "alert_type",
+      "fieldtype": "Select",
+      "label": "Alert Type",
+      "options": "Automatic\nManual",
+      "read_only": 1
+    },
+    {
+      "default": "Pending",
+      "fieldname": "notification_status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Notification Status",
+      "options": "Pending\nSent\nFailed",
+      "read_only": 1
+    },
+    {
+      "default": "Pending",
+      "fieldname": "email_status",
+      "fieldtype": "Select",
+      "label": "Email Status",
+      "options": "Not Configured\nPending\nSent\nFailed",
+      "read_only": 1
+    },
+    {
+      "default": "Pending",
+      "fieldname": "sms_status",
+      "fieldtype": "Select",
+      "label": "SMS Status",
+      "options": "Not Configured\nPending\nSent\nFailed",
+      "read_only": 1
+    },
+    {
+      "default": "Pending",
+      "fieldname": "whatsapp_status",
+      "fieldtype": "Select",
+      "label": "WhatsApp Status",
+      "options": "Not Configured\nPending\nSent\nFailed",
+      "read_only": 1
+    },
+    {
+      "fieldname": "alert_sent_on",
+      "fieldtype": "Datetime",
+      "label": "Alert Sent On",
+      "read_only": 1
+    },
+    {
+      "fieldname": "error_log",
+      "fieldtype": "Small Text",
+      "label": "Error Log",
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "module": "LIMS",
+  "name": "Lab Critical Result Alert",
+  "naming_rule": "By \"Naming Series\" field",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "read": 1,
+      "role": "LIMS Manager",
+      "report": 1
+    },
+    {
+      "read": 1,
+      "role": "LIMS Technician",
+      "report": 1
+    }
+  ],
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

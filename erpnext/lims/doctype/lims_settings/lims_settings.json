@@ -6,42 +6,89 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "sms_section",
   "enable_sms",
+  "sms_provider",
+  "sms_account_sid",
+  "sms_auth_token",
+  "sms_from_number",
+  "whatsapp_section",
   "enable_whatsapp",
-    "whatsapp_webhook_url",
-    "enable_offline_sync",
-    "sync_batch_limit"
+  "whatsapp_webhook_url",
+  "sync_section",
+  "enable_offline_sync",
+  "sync_batch_limit"
  ],
  "fields": [
+  {
+   "fieldname": "sms_section",
+   "fieldtype": "Section Break",
+   "label": "SMS Configuration"
+  },
   {
    "default": "1",
    "fieldname": "enable_sms",
    "fieldtype": "Check",
-   "label": "Enable SMS"
+   "label": "Enable SMS Notifications"
+  },
+  {
+   "depends_on": "eval:doc.enable_sms",
+   "fieldname": "sms_provider",
+   "fieldtype": "Select",
+   "label": "SMS Provider",
+   "options": "Twilio\nAWS SNS\nCustom HTTP"
+  },
+  {
+   "depends_on": "eval:doc.enable_sms && doc.sms_provider == 'Twilio'",
+   "fieldname": "sms_account_sid",
+   "fieldtype": "Password",
+   "label": "Twilio Account SID"
+  },
+  {
+   "depends_on": "eval:doc.enable_sms && doc.sms_provider == 'Twilio'",
+   "fieldname": "sms_auth_token",
+   "fieldtype": "Password",
+   "label": "Twilio Auth Token"
+  },
+  {
+   "depends_on": "eval:doc.enable_sms && doc.sms_provider == 'Twilio'",
+   "fieldname": "sms_from_number",
+   "fieldtype": "Data",
+   "label": "SMS From Number (Twilio)"
+  },
+  {
+   "fieldname": "whatsapp_section",
+   "fieldtype": "Section Break",
+   "label": "WhatsApp Configuration"
   },
   {
    "default": "0",
    "fieldname": "enable_whatsapp",
    "fieldtype": "Check",
-   "label": "Enable WhatsApp"
+   "label": "Enable WhatsApp Notifications"
   },
   {
    "depends_on": "eval:doc.enable_whatsapp",
    "fieldname": "whatsapp_webhook_url",
    "fieldtype": "Data",
    "label": "WhatsApp Webhook URL"
-    },
-    {
-     "default": "1",
-     "fieldname": "enable_offline_sync",
-     "fieldtype": "Check",
-     "label": "Enable Offline Sync"
-    },
-    {
-     "default": "200",
-     "fieldname": "sync_batch_limit",
-     "fieldtype": "Int",
-     "label": "Sync Batch Limit"
+  },
+  {
+   "fieldname": "sync_section",
+   "fieldtype": "Section Break",
+   "label": "Offline Sync Configuration"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_offline_sync",
+   "fieldtype": "Check",
+   "label": "Enable Offline Sync"
+  },
+  {
+   "default": "200",
+   "fieldname": "sync_batch_limit",
+   "fieldtype": "Int",
+   "label": "Sync Batch Limit"
   }
  ],
  "issingle": 1,
@@ -57,6 +104,11 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "LIMS Manager",
    "write": 1
   }
  ],
