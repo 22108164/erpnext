@@ -118,6 +118,8 @@ erpnext.patches.v12_0.set_production_capacity_in_workstation
 erpnext.patches.v12_0.set_employee_preferred_emails
 erpnext.patches.v12_0.set_against_blanket_order_in_sales_and_purchase_order
 erpnext.patches.v12_0.set_cost_center_in_child_table_of_expense_claim
+erpnext.patches.v16_0.configure_lims_only_workspace
+erpnext.patches.v16_0.setup_nxlims_roles
 erpnext.patches.v12_0.set_lead_title_field
 erpnext.patches.v12_0.set_permission_einvoicing
 erpnext.patches.v12_0.create_irs_1099_field_united_states
@@ -472,4 +474,5 @@ erpnext.patches.v16_0.complete_onboarding_steps_for_older_sites #2
 erpnext.patches.v16_0.enable_serial_batch_setting
 erpnext.patches.v16_0.co_by_product_patch
 erpnext.patches.v16_0.update_requested_qty_packed_item
+erpnext.patches.v16_0.configure_lims_only_workspace
 erpnext.patches.v16_0.remove_payables_receivables_workspace

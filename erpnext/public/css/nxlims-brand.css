@@ -1,0 +1,35 @@
+:root {
+	--nxlims-primary: #49b3db;
+	--nxlims-primary-dark: #1589b8;
+	--nxlims-ink: #0c2a37;
+	--nxlims-accent: #8fd9f2;
+}
+
+.navbar-home img,
+.app-logo {
+	filter: saturate(1.08);
+}
+
+.page-head,
+.widget .widget-head {
+	border-color: color-mix(in srgb, var(--nxlims-primary) 28%, #dfe7ec);
+}
+
+.btn-primary,
+.standard-actions .btn-primary,
+.btn-primary:focus,
+.btn-primary:hover {
+	background-color: var(--nxlims-primary);
+	border-color: var(--nxlims-primary-dark);
+}
+
+.indicator-pill.blue,
+.indicator-pill.green {
+	background-color: color-mix(in srgb, var(--nxlims-primary) 14%, #ffffff);
+	color: var(--nxlims-ink);
+}
+
+.sidebar-item-container .desk-sidebar-item:hover,
+.sidebar-item-container .desk-sidebar-item.selected {
+	background: color-mix(in srgb, var(--nxlims-accent) 24%, #ffffff);
+}

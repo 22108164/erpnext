@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>NxLIMS Offline</title>
+	<style>
+		:root {
+			--bg: #f2f7fa;
+			--card: #ffffff;
+			--ink: #0c2a37;
+			--brand: #49b3db;
+		}
+		* { box-sizing: border-box; }
+		body {
+			margin: 0;
+			font-family: Segoe UI, Tahoma, sans-serif;
+			color: var(--ink);
+			background: radial-gradient(circle at 30% 20%, #d8eff9, var(--bg));
+			display: grid;
+			min-height: 100vh;
+			place-items: center;
+		}
+		.card {
+			width: min(640px, 92vw);
+			padding: 2rem;
+			border-radius: 18px;
+			background: var(--card);
+			box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+		}
+		h1 { margin-top: 0; }
+		.badge {
+			display: inline-block;
+			padding: 0.2rem 0.7rem;
+			border-radius: 100px;
+			background: #e3f4fb;
+			color: #0f5b79;
+			font-size: 0.82rem;
+			font-weight: 600;
+		}
+	</style>
+</head>
+<body>
+	<main class="card">
+		<span class="badge">NxLIMS</span>
+		<h1>Connection unavailable</h1>
+		<p>The NxLIMS server cannot be reached right now. Keep this app open; it will reconnect automatically.</p>
+		<p>For offline-only deployments, configure NxLIMS Desktop to point to your local server endpoint (for example: http://127.0.0.1:8000).</p>
+	</main>
+</body>
+</html>
