@@ -72,6 +72,7 @@ get_help_messages = "erpnext.utilities.activation.get_help_messages"
 leaderboards = "erpnext.startup.leaderboard.get_leaderboards"
 filters_config = "erpnext.startup.filters.get_filters_config"
 additional_print_settings = "erpnext.controllers.print_settings.get_print_settings"
+get_desk_sidebar_items = "erpnext.lims.sidebar.get_lims_sidebar_items"
 
 on_session_creation = "erpnext.portal.utils.create_customer_or_supplier"
 
