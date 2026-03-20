@@ -1,0 +1,67 @@
+{
+ "actions": [],
+ "creation": "2026-03-20 00:00:00.000000",
+ "doctype": "DocType",
+ "document_type": "System",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "enable_sms",
+  "enable_whatsapp",
+    "whatsapp_webhook_url",
+    "enable_offline_sync",
+    "sync_batch_limit"
+ ],
+ "fields": [
+  {
+   "default": "1",
+   "fieldname": "enable_sms",
+   "fieldtype": "Check",
+   "label": "Enable SMS"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_whatsapp",
+   "fieldtype": "Check",
+   "label": "Enable WhatsApp"
+  },
+  {
+   "depends_on": "eval:doc.enable_whatsapp",
+   "fieldname": "whatsapp_webhook_url",
+   "fieldtype": "Data",
+   "label": "WhatsApp Webhook URL"
+    },
+    {
+     "default": "1",
+     "fieldname": "enable_offline_sync",
+     "fieldtype": "Check",
+     "label": "Enable Offline Sync"
+    },
+    {
+     "default": "200",
+     "fieldname": "sync_batch_limit",
+     "fieldtype": "Int",
+     "label": "Sync Batch Limit"
+  }
+ ],
+ "issingle": 1,
+ "links": [],
+ "module": "LIMS",
+ "name": "LIMS Settings",
+ "permissions": [
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

@@ -1,0 +1,48 @@
+{
+  "name": "nxlims-desktop",
+  "version": "1.0.0",
+  "description": "NxLIMS Windows desktop launcher",
+  "main": "main.js",
+  "author": "NxLIMS",
+  "license": "GPL-3.0",
+  "scripts": {
+    "start": "electron .",
+    "dist:win": "electron-builder --win nsis"
+  },
+  "dependencies": {
+    "electron-store": "^8.2.0"
+  },
+  "devDependencies": {
+    "electron": "^30.5.1",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.nxlims.desktop",
+    "productName": "NxLIMS",
+    "files": [
+      "main.js",
+      "preload.js",
+      "offline.html",
+      "assets/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "NxLIMS"
+    }
+  }
+}

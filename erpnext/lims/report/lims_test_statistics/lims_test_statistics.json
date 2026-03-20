@@ -1,0 +1,24 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2026-03-20 00:00:00.000000",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "doctype": "Report",
+ "filters": [],
+ "is_standard": "Yes",
+ "module": "LIMS",
+ "name": "LIMS Test Statistics",
+ "prepared_report": 0,
+ "ref_doctype": "Lab Test Registration",
+ "report_name": "LIMS Test Statistics",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Sales User"
+  }
+ ]
+}

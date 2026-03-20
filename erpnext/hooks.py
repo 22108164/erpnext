@@ -1,32 +1,39 @@
 app_name = "erpnext"
-app_title = "ERPNext"
+app_title = "NxLIMS"
 app_publisher = "Frappe Technologies Pvt. Ltd."
-app_description = """ERP made simple"""
+app_description = """NxLIMS powered by ERPNext"""
 app_icon = "fa fa-th"
-app_color = "#e74c3c"
+app_color = "#49B3DB"
 app_email = "hello@frappe.io"
 app_license = "GNU General Public License (v3)"
 source_link = "https://github.com/frappe/erpnext"
-app_logo_url = "/assets/erpnext/images/erpnext-logo.svg"
-
+app_logo_url = "/assets/erpnext/images/nxlims-logo.svg"
+app_home = "/desk"
 
 add_to_apps_screen = [
 	{
-		"name": "erpnext",
-		"logo": "/assets/erpnext/images/erpnext-logo-blue.png",
-		"title": "ERPNext",
-		"route": "/app/home",
+		"name": app_name,
+		"logo": "/assets/erpnext/images/nxlims-logo.svg",
+		"title": app_title,
+		"route": app_home,
 		"has_permission": "erpnext.check_app_permission",
 	}
 ]
 
-develop_version = "15.x.x-develop"
+develop_version = "17.x.x-develop"
 
 app_include_js = "erpnext.bundle.js"
-app_include_css = "erpnext.bundle.css"
-web_include_js = "erpnext-web.bundle.js"
+app_include_css = ["erpnext.bundle.css", "/assets/erpnext/css/nxlims-brand.css"]
 web_include_css = "erpnext-web.bundle.css"
 email_css = "email_erpnext.bundle.css"
+
+app_include_icons = [
+	"/assets/erpnext/icons/pos-icons.svg",
+]
+
+web_include_icons = [
+	"/assets/erpnext/icons/pos-icons.svg",
+]
 
 doctype_js = {
 	"Address": "public/js/address.js",
@@ -44,7 +51,9 @@ doctype_list_js = {
 	],
 }
 
-override_doctype_class = {"Address": "erpnext.accounts.custom.address.ERPNextAddress"}
+page_js = {"print": "public/js/print.js"}
+
+extend_doctype_class = {"Address": "erpnext.accounts.custom.address.ERPNextAddress"}
 
 override_whitelisted_methods = {"frappe.www.contact.send_message": "erpnext.templates.utils.send_message"}
 
@@ -54,11 +63,7 @@ welcome_email = "erpnext.setup.utils.welcome_email"
 setup_wizard_requires = "assets/erpnext/js/setup_wizard.js"
 setup_wizard_stages = "erpnext.setup.setup_wizard.setup_wizard.get_setup_stages"
 setup_wizard_complete = "erpnext.setup.setup_wizard.setup_wizard.setup_demo"
-setup_wizard_test = "erpnext.setup.setup_wizard.test_setup_wizard.run_setup_wizard_test"
 
-before_install = [
-	"erpnext.setup.install.check_frappe_version",
-]
 after_install = "erpnext.setup.install.after_install"
 
 boot_session = "erpnext.startup.boot.boot_session"
@@ -109,8 +114,8 @@ calendars = ["Task", "Work Order", "Sales Order", "Holiday List", "ToDo"]
 website_generators = ["BOM", "Sales Partner"]
 
 website_context = {
-	"favicon": "/assets/erpnext/images/erpnext-favicon.svg",
-	"splash_image": "/assets/erpnext/images/erpnext-logo.svg",
+	"favicon": "/assets/erpnext/images/nxlims-favicon.ico",
+	"splash_image": "/assets/erpnext/images/nxlims-logo.svg",
 }
 
 # nosemgrep
@@ -140,6 +145,14 @@ website_route_rules = [
 		},
 	},
 	{"from_route": "/purchase-orders", "to_route": "Purchase Order"},
+	{
+		"from_route": "/purchase-orders/<path:name>",
+		"to_route": "order",
+		"defaults": {
+			"doctype": "Purchase Order",
+			"parents": [{"label": "Purchase Order", "route": "purchase-orders"}],
+		},
+	},
 	{
 		"from_route": "/purchase-orders/<path:name>",
 		"to_route": "order",
@@ -203,6 +216,17 @@ website_route_rules = [
 	},
 	{"from_route": "/project", "to_route": "Project"},
 	{"from_route": "/tasks", "to_route": "Task"},
+]
+
+standard_navbar_items = [
+	{
+		"item_label": "Delete Demo Data",
+		"item_type": "Action",
+		"action": "erpnext.demo.clear_demo();",
+		"is_standard": 1,
+		"condition": "eval: frappe.boot.sysdefaults.demo_company && frappe.boot.sysdefaults.demo_company.length > 0",
+		"icon": "trash",
+	},
 ]
 
 standard_portal_menu_items = [
@@ -273,14 +297,10 @@ standard_portal_menu_items = [
 	{"title": "Appointment Booking", "route": "/book_appointment"},
 ]
 
-default_roles = [
-	{"role": "Customer", "doctype": "Contact", "email_field": "email_id"},
-	{"role": "Supplier", "doctype": "Contact", "email_field": "email_id"},
-]
-
 sounds = [
 	{"name": "incoming-call", "src": "/assets/erpnext/sounds/incoming-call.mp3", "volume": 0.2},
 	{"name": "call-disconnect", "src": "/assets/erpnext/sounds/call-disconnect.mp3", "volume": 0.2},
+	{"name": "numpad-touch", "src": "/assets/erpnext/sounds/numpad-touch.mp3", "volume": 0.8},
 ]
 
 has_upload_permission = {"Employee": "erpnext.setup.doctype.employee.employee.has_upload_permission"}
@@ -298,8 +318,6 @@ has_website_permission = {
 	"Timesheet": "erpnext.controllers.website_list_for_contact.has_website_permission",
 	"Project": "erpnext.controllers.website_list_for_contact.has_website_permission",
 }
-
-before_tests = "erpnext.setup.utils.before_tests"
 
 
 period_closing_doctypes = [
@@ -357,7 +375,6 @@ doc_events = {
 	},
 	"Sales Invoice": {
 		"on_submit": [
-			"erpnext.regional.create_transaction_log",
 			"erpnext.regional.italy.utils.sales_invoice_on_submit",
 		],
 		"on_cancel": [
@@ -372,9 +389,6 @@ doc_events = {
 		]
 	},
 	"Payment Entry": {
-		"on_submit": [
-			"erpnext.regional.create_transaction_log",
-		],
 		"on_trash": "erpnext.regional.check_deletion_permission",
 	},
 	"Address": {
@@ -396,15 +410,25 @@ doc_events = {
 }
 
 # function should expect the variable and doc as arguments
+naming_series_variables_list = ["FY", "TFY", "ABBR", "MM", "DD", "YY", "YYYY", "JJJ", "WW"]
 naming_series_variables = {
-	"FY": "erpnext.accounts.utils.parse_naming_series_variable",
+	variable: "erpnext.accounts.utils.parse_naming_series_variable"
+	for variable in naming_series_variables_list
 }
 
-# On cancel event Payment Entry will be exempted and all linked submittable doctype will get cancelled.
-# to maintain data integrity we exempted payment entry. it will un-link when sales invoice get cancelled.
-# if payment entry not in auto cancel exempted doctypes it will cancel payment entry.
 auto_cancel_exempted_doctypes = [
+	# On cancel event Payment Entry will be exempted and all linked submittable doctype will get cancelled.
+	# to maintain data integrity we exempted payment entry. it will un-link when sales invoice get cancelled.
+	# if payment entry not in auto cancel exempted doctypes it will cancel payment entry.
 	"Payment Entry",
+	# Reverse ledger entries are created instead to ensure ledger immutability.
+	"GL Entry",
+	"Stock Ledger Entry",
+	"Payment Ledger Entry",
+	"Advance Payment Ledger Entry",
+	# May be linked to Period Closing Voucher, but cancelled with custom logic in PCV.
+	# This is better to avoid stale docs when cancelling PCV from backend.
+	"Account Closing Balance",
 ]
 
 scheduler_events = {
@@ -412,7 +436,9 @@ scheduler_events = {
 		"0/15 * * * *": [
 			"erpnext.manufacturing.doctype.bom_update_log.bom_update_log.resume_bom_cost_update_jobs",
 		],
-		"0/30 * * * *": [],
+		"0/30 * * * *": [
+			"erpnext.stock.doctype.repost_item_valuation.repost_item_valuation.run_parallel_reposting",
+		],
 		# Hourly but offset by 30 minutes
 		"30 * * * *": [
 			"erpnext.accounts.doctype.gl_entry.gl_entry.rename_gle_sle_docs",
@@ -497,7 +523,8 @@ payment_gateway_enabled = "erpnext.accounts.utils.create_payment_gateway_account
 
 communication_doctypes = ["Customer", "Supplier"]
 
-advance_payment_doctypes = ["Sales Order", "Purchase Order"]
+advance_payment_receivable_doctypes = ["Sales Order"]
+advance_payment_payable_doctypes = ["Purchase Order"]
 
 invoice_doctypes = ["Sales Invoice", "Purchase Invoice"]
 
@@ -523,6 +550,7 @@ accounting_dimension_doctypes = [
 	"Purchase Order Item",
 	"Sales Order Item",
 	"Journal Entry Account",
+	"Journal Entry Template Account",
 	"Material Request Item",
 	"Delivery Note Item",
 	"Purchase Receipt Item",
@@ -603,6 +631,7 @@ user_privacy_documents = [
 	},
 ]
 
+
 # ERPNext doctypes for Global Search
 global_search_doctypes = {
 	"Default": [
@@ -647,6 +676,10 @@ global_search_doctypes = {
 	],
 }
 
+ignore_links_on_delete = [
+	"Tax Withholding Entry",
+]
+
 additional_timeline_content = {"*": ["erpnext.telephony.doctype.call_log.call_log.get_linked_call_logs"]}
 
 
@@ -663,3 +696,9 @@ default_log_clearing_doctypes = {
 export_python_type_annotations = True
 
 fields_for_group_similar_items = ["qty", "amount"]
+
+# Translation
+# ------------
+# List of apps whose translatable strings should be excluded from this app's translations.
+ignore_translatable_strings_from = ["frappe"]
+require_type_annotated_api_methods = True
