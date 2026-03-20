@@ -21,8 +21,9 @@ NxLIMS is a comprehensive Laboratory Information Management System (LIMS) built 
 
 ```bash
 # 1. Clone and setup
-git clone https://github.com/frappe/erpnext.git nxlims
+git clone https://github.com/<your-github-user>/erpnext.git nxlims
 cd nxlims
+git remote add upstream https://github.com/frappe/erpnext.git  # optional
 
 # 2. Run production setup
 bash setup-production.sh production nxlims_production /path/to/bench

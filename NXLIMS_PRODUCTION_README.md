@@ -81,8 +81,9 @@ desktop/nxlims-desktop/           # Electron desktop app
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/frappe/erpnext.git nxlims
+git clone https://github.com/<your-github-user>/erpnext.git nxlims
 cd nxlims
+git remote add upstream https://github.com/frappe/erpnext.git  # optional
 
 # 2. Install Frappe Bench
 pip3 install frappe-bench
@@ -91,7 +92,7 @@ pip3 install frappe-bench
 bench init nxlims_prod --frappe-branch develop
 cd nxlims_prod
 bench new-site production
-bench get-app erpnext https://github.com/frappe/erpnext.git
+bench get-app erpnext https://github.com/<your-github-user>/erpnext.git
 bench --site production install-app erpnext
 
 # 4. Initialize LIMS

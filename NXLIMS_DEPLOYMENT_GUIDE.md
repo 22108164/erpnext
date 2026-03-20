@@ -131,7 +131,7 @@ cd nxlims_prod
 bench new-site production --db-name nxlims_production --db-root-password YourPassword
 
 # Download NxLIMS (ERPNext with LIMS customizations)
-bench get-app erpnext https://github.com/frappe/erpnext.git
+bench get-app erpnext https://github.com/<your-github-user>/erpnext.git
 bench --site production install-app erpnext
 
 # Install NxLIMS specific apps if published separately
